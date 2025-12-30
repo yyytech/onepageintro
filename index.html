@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>압박 조끼 & 마음 설문 프로젝트 소개</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card-bg: #ffffff;
+      --accent: #4f8cff;
+      --accent-soft: #e3eeff;
+      --text-main: #222222;
+      --text-sub: #666666;
+      --border-soft: #e0e4ec;
+      --shadow-soft: 0 10px 25px rgba(15, 35, 70, 0.08);
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        system-ui, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #f0f4ff 0, #fdfdfd 45%, #f6f8fb 100%);
+      color: var(--text-main);
+      padding: 24px 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 880px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      padding: 24px 20px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    /* iPad 12.9 세로(대략 1024×1366) 기준 최적화 */
+    @media (min-width: 900px) and (max-width: 1100px) and (orientation: portrait) {
+      body {
+        padding: 28px 24px;
+      }
+      .page {
+        max-width: 820px;      /* 너무 넓지 않게 A4 느낌 */
+        border-radius: 30px;
+        padding: 28px 28px 32px;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .page {
+        padding: 34px 38px 38px;
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: 22px;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+    }
+
+    @media (min-width: 900px) {
+      h1 {
+        font-size: 24px; /* iPad에서 너무 크지 않게 */
+      }
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1.1fr 0.9fr;  /* iPad 세로에서 적당한 비율 */
+        gap: 18px;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px;
+    }
+
+    @media (min-width: 900px) {
+      .card {
+        padding: 18px 18px;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .card-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .card-label {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(79, 140, 255, 0.15);
+      color: var(--text-sub);
+      background: #f8faff;
+      white-space: nowrap;
+    }
+
+    .body-text {
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    .body-text strong {
+      font-weight: 600;
+    }
+
+    .bullet-list {
+      margin-top: 5px;
+      padding-left: 16px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    .bullet-list li + li {
+      margin-top: 3px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      padding: 4px 9px;
+      font-size: 11px;
+      border-radius: var(--radius-pill);
+      background: #f4f6fb;
+      color: var(--text-sub);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .sub-section-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-top: 7px;
+      margin-bottom: 3px;
+    }
+
+    /* 포스터 캡처 자리 */
+    .poster-wrapper {
+      background: linear-gradient(145deg, #f3f6ff, #ffffff);
+      border-radius: var(--radius-xl);
+      border: 1px dashed rgba(79, 140, 255, 0.35);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .poster-text {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
+
+    .poster-note {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .poster-image-box {
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--border-soft);
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+      color: #9aa3b8;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .poster-image-box img {
+      max-width: 100%;
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* 운영 방식 + 약속 영역 */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 16px;
+      }
+    }
+
+    .promise-card {
+      background: #f6f9ff;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 140, 255, 0.2);
+      padding: 14px 14px;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .promise-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .promise-list {
+      margin-top: 4px;
+      padding-left: 14px;
+      line-height: 1.7;
+      font-size: 12px;
+    }
+
+    .contact {
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: var(--text-sub);
+    }
+
+    .contact span {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      font-size: 10.5px;
+      color: #9aa3b8;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- 상단 헤더 / 프로젝트 한 줄 설명 -->
+    <header class="header">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        청년 멘탈케어 파일럿 프로젝트
+      </div>
+      <h1>
+        포옹의 안정감을, 일상으로.<br />
+        <strong>압박 조끼 & 마음 설문</strong> 실험 소개
+      </h1>
+      <p class="subtitle">
+        스트레스·불안으로 힘든 사람들이, 부담 없이 <strong>“잠깐 숨 고를 수 있는 경험”</strong>을 할 수 있도록
+        포옹과 비슷한 압박 자극과 간단한 웹 설문을 결합한 파일럿 프로젝트입니다.
+        최근 정신건강 전문가들이 강조하는 <strong>‘신체 감각 기반 안정 기법’</strong>과
+        <strong>‘자기 인식(self-check)’</strong> 원칙을 바탕으로 설계했습니다.
+      </p>
+    </header>
+
+    <!-- 본문: 문제 정의 + 포스터/템플릿 설명 -->
+    <section class="grid">
+      <!-- 왼쪽: 문제 정의 + 개요 -->
+      <article class="card">
+        <div class="card-header">
+          <h2>왜 이 실험을 하나요? (문제 정의)</h2>
+          <div class="card-label">정신건강 전문가 의견 반영</div>
+        </div>
+        <div class="body-text">
+          <p>
+            여러 연구와 임상 현장에서 공통적으로 이야기하는 부분은,
+            <strong>많은 사람들이 스트레스·불안·우울을 겪지만 병원이나 상담실 문을 쉽게 두드리지 못한다</strong>는 점입니다.
+          </p>
+          <ul class="bullet-list">
+            <li>“나보다 더 힘든 사람이 많을 것 같아서” 도움 요청을 미루거나,</li>
+            <li>“정신과, 상담은 너무 큰 결심이 필요하다”고 느끼는 경우가 많습니다.</li>
+          </ul>
+          <p style="margin-top:6px;">
+            한편, 정신건강·트라우마 전문가들은
+            <strong>포옹, 가벼운 압박, 호흡과 같은 신체적 자극</strong>이
+            불안과 과각성(긴장)을 낮추는 데 도움을 줄 수 있다고 제안합니다.
+            또한, <strong>지금 내 상태를 객관적으로 점검하는 짧은 설문</strong>만으로도
+            스스로를 돌보려는 첫 걸음을 떼는 데 의미가 있다고 말합니다.
+          </p>
+
+          <p style="margin-top:8px;">
+            이 프로젝트는 이러한 전문가들의 의견을 토대로,
+            <strong>“누구나, 짧은 시간 동안, 부담 없이 해볼 수 있는 멘탈케어 경험”</strong>을
+            실제 생활 공간(카페·센터·공공기관 등)에 가져와 보려는 시도입니다.
+          </p>
+
+          <div class="sub-section-title">프로젝트 한 줄 설명</div>
+          <p class="body-text" style="font-size:12.5px;">
+            <strong>“포옹과 비슷한 압박 자극과 간단한 웹 설문을 통해,
+            혼자 버티는 이들이 잠시나마 안정감을 느끼고 자신의 상태를 알아볼 수 있도록 돕는 청년 멘탈케어 파일럿 실험입니다.”</strong>
+          </p>
+
+          <div class="pill-row">
+            <div class="pill">부담 없는 참여</div>
+            <div class="pill">신체 감각 기반 안정</div>
+            <div class="pill">자기 상태 점검</div>
+            <div class="pill">익명 설문</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 오른쪽: 템플릿 / 포스터 설명 + 이미지 자리 -->
+      <aside class="poster-wrapper">
+        <div>
+          <div style="font-size:13px; font-weight:700; margin-bottom:4px;">
+            템플릿 / 포스터 구성
+          </div>
+          <p class="poster-text">
+            방문자·이용자분들이 <strong>QR 코드 한 번으로</strong>
+            3~5분 내에 참여할 수 있는 웹 설문과,
+            그 설문으로 연결되는 <strong>포스터/스티커 템플릿</strong>을 제공합니다.
+          </p>
+          <ul class="bullet-list" style="margin-top:6px;">
+            <li>포스터 1장 또는 소형 스티커 형태</li>
+            <li>QR 스캔 → 간단한 스트레스·안정감 설문 진행</li>
+            <li>참여 직후, 개인에게 <strong>요약 결과와 간단한 자기 돌봄 가이드</strong> 제공</li>
+            <li>전체 데이터는 <strong>익명·집계 통계</strong>로만 활용</li>
+          </ul>
+          <p class="poster-note" style="margin-top:6px;">
+            문구와 디자인은 공간의 분위기를 해치지 않도록,
+            정신건강 전문가와 실제 사용자 피드백을 참고해
+            <strong>밝지만 가벼워 보이지 않게</strong> 제작합니다.
+          </p>
+        </div>
+
+        <!-- 포스터 캡처 이미지 자리 -->
+        <div class="poster-image-box">
+          <!--
+            여기에 실제 포스터 캡처 이미지를 넣으면 됩니다.
+            예: <img src="poster-sample.png" alt="포스터 예시 이미지" />
+          -->
+          포스터 예시 이미지를 여기에 넣어주세요.<br />
+          (예: <code>&lt;img src="poster-sample.png" alt="포스터 예시" /&gt;</code>)
+        </div>
+      </aside>
+    </section>
+
+    <!-- 운영 방식 + 공간에 드리는 약속 -->
+    <section class="footer-grid">
+      <!-- 운영 방식 -->
+      <article class="card">
+        <div class="card-header">
+          <h2>운영 방식 (공간 입장에서)</h2>
+          <div class="card-label">간단하지만 통제 가능한 참여</div>
+        </div>
+        <div class="body-text">
+          <div class="sub-section-title">1. 설치 및 기간</div>
+          <ul class="bullet-list">
+            <li>공간과 상의 후, <strong>카운터 옆 / 안내판 / 게시판 등</strong>에 포스터 1장 부착</li>
+            <li>기본 제안 기간: <strong>2주 ~ 4주</strong> (원하시면 더 짧게/길게도 조정 가능)</li>
+            <li>언제든지 부담이 되시면 <strong>즉시 철거 가능</strong> – 공간의 결정이 최우선입니다.</li>
+          </ul>
+
+          <div class="sub-section-title">2. 참여자 흐름</div>
+          <ul class="bullet-list">
+            <li>포스터 문구를 보고, 관심 있는 분이 자율적으로 QR 스캔</li>
+            <li>3~5분 설문 → 현재 스트레스·안정감 수준에 대한 간단한 결과 제공</li>
+            <li>필요 시, 전문 상담/도움이 될 수 있는 곳에 대한 안내 문구도 함께 노출</li>
+          </ul>
+
+          <div class="sub-section-title">3. 데이터 활용 및 공유</div>
+          <ul class="bullet-list">
+            <li>응답 내용은 <strong>이름 없이, 익명</strong>으로만 저장</li>
+            <li>특정 개인을 식별할 수 있는 정보는 수집하지 않거나, 꼭 필요한 경우에 한해 최소화</li>
+            <li>원하실 경우, 해당 공간을 이용한 분들의 <strong>익명 통계 요약</strong>을
+              (예: “스트레스 고위험 비율”, “주요 걱정 영역”) 공유해 드립니다.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 공간에 드리는 약속 -->
+      <aside class="promise-card">
+        <div class="promise-title">공간에 드리는 약속</div>
+        <ul class="promise-list">
+          <li><strong>광고나 판매 목적이 아닙니다.</strong><br />
+            프로젝트의 1차 목표는 “실제 사람들이 체감하는 안정감”을 높이는 실험입니다.
+          </li>
+          <li><strong>공간의 분위기와 이용자를 최우선으로 생각합니다.</strong><br />
+            문구와 디자인은 밝지만 가볍지 않게, 과도한 자극 없이 제작합니다.
+          </li>
+          <li><strong>개인정보는 최소한만, 안전하게.</strong><br />
+            전문가들이 권장하는 <em>‘최소 수집·명확한 목적·안전한 보관’</em> 원칙을 따릅니다.
+          </li>
+          <li><strong>운영의 부담은 최대한 제가 맡겠습니다.</strong><br />
+            포스터 인쇄·부착·철거, 온라인 설문 운영까지 전부 직접 책임지고 관리합니다.
+          </li>
+        </ul>
+
+        <div class="contact">
+          궁금한 점이 있으시면 언제든지 편하게 문의 주세요.<br />
+          <span>담당: 김영건</span> / 이메일·연락처는 별도 전달 드립니다.
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer-note">
+      ※ 이 페이지는 실제 정신건강·심리치료 전문가들의 의견과 관련 연구 동향을 참고해 설계된
+      파일럿 설명용 자료입니다.
+    </div>
+  </main>
+</body>
+</html>
